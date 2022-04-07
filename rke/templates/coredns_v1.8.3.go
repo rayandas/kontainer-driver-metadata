@@ -74,7 +74,9 @@ data:
 	{{- if .UpstreamNameservers }}
         forward . {{range $i, $v := .UpstreamNameservers}}{{if $i}} {{end}}{{.}}{{end}}
 	{{- else }}
-        forward . "/etc/resolv.conf"
+        forward . "/etc/resolv.conf"{
+          policy sequential
+        }
 	{{- end }}
         cache 30
         loop
