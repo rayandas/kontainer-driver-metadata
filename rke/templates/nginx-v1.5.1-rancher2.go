@@ -132,6 +132,14 @@ rules:
       - get
       - list
       - watch
+  - apiGroups:
+      - discovery.k8s.io
+    resources:
+      - endpointslices
+    verbs:
+      - list
+      - watch
+      - get
 ---
 # Source: ingress-nginx/templates/clusterrolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -222,7 +230,7 @@ rules:
     {{- if .DefaultIngressClass}}
       - ingress-controller-leader-nginx
     {{- else }}
-      - ingress-nginx-leader
+      - ingress-controller-leader
     {{- end}}
     verbs:
       - get
@@ -236,7 +244,19 @@ rules:
   - apiGroups:
       - coordination.k8s.io
     resourceNames:
+<<<<<<< Updated upstream
       - ingress-nginx-leader
+=======
+    # Defaults to "<election-id>-<ingress-class>"
+    # Here: "<ingress-controller-leader>-<nginx>"
+    # This has to be adapted if you change either parameter
+    # when launching the nginx-ingress-controller.
+    {{- if .DefaultIngressClass}}
+      - ingress-controller-leader-nginx
+    {{- else }}
+      - ingress-controller-leader
+    {{- end}}
+>>>>>>> Stashed changes
     resources:
       - leases
     verbs:
@@ -386,7 +406,7 @@ spec:
             {{- if .DefaultIngressClass}}
             - --election-id=ingress-controller-leader-nginx
             {{- else }}
-            - --election-id=ingress-nginx-leader
+            - --election-id=ingress-controller-leader
             {{- end}}
             - --controller-class=k8s.io/ingress-nginx
             - --configmap=$(POD_NAMESPACE)/ingress-nginx-controller
