@@ -220,7 +220,7 @@ rules:
     # This has to be adapted if you change either parameter
     # when launching the nginx-ingress-controller.
     {{- if .DefaultIngressClass}}
-      - ingress-nginx-leader-nginx
+      - ingress-controller-leader-nginx
     {{- else }}
       - ingress-nginx-leader
     {{- end}}
@@ -255,6 +255,14 @@ rules:
     verbs:
       - create
       - patch
+  - apiGroups:
+      - discovery.k8s.io
+    resources:
+      - endpointslices
+    verbs:
+      - list
+      - watch
+      - get
 ---
 # Source: ingress-nginx/templates/controller-rolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -378,7 +386,7 @@ spec:
             {{- if .DefaultIngressClass}}
             - --election-id=ingress-controller-leader-nginx
             {{- else }}
-            - --election-id=ingress-controller-leader
+            - --election-id=ingress-nginx-leader
             {{- end}}
             - --controller-class=k8s.io/ingress-nginx
             - --configmap=$(POD_NAMESPACE)/ingress-nginx-controller
