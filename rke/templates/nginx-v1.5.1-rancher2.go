@@ -220,9 +220,9 @@ rules:
     # This has to be adapted if you change either parameter
     # when launching the nginx-ingress-controller.
     {{- if .DefaultIngressClass}}
-      - ingress-controller-leader-nginx
+      - ingress-nginx-leader-nginx
     {{- else }}
-      - ingress-controller-leader
+      - ingress-nginx-leader
     {{- end}}
     verbs:
       - get
@@ -236,7 +236,7 @@ rules:
   - apiGroups:
       - coordination.k8s.io
     resourceNames:
-      - ingress-controller-leader
+      - ingress-nginx-leader
     resources:
       - leases
     verbs:
