@@ -8641,7 +8641,7 @@ func loadK8sRKESystemImages() map[string]v3.RKESystemImages {
 		// Enabled out of band post v2.7.1
 		"v1.24.10-rancher4-1": {
 			Etcd:                      "rancher/mirrored-coreos-etcd:v3.5.4",
-			Kubernetes:                "rancher/hyperkube:v1.24.10-rancher4",
+			Kubernetes:                "hackman91/hyperkube:v1.24.10-rancher4",
 			Alpine:                    "rancher/rke-tools:v0.1.88",
 			NginxProxy:                "rancher/rke-tools:v0.1.88",
 			CertDownloader:            "rancher/rke-tools:v0.1.88",
@@ -8729,7 +8729,7 @@ func loadK8sRKESystemImages() map[string]v3.RKESystemImages {
 		// Enabled in Rancher v2.7.2
 		"v1.25.6-rancher4-1": {
 			Etcd:                      "rancher/mirrored-coreos-etcd:v3.5.6",
-			Kubernetes:                "rancher/hyperkube:v1.25.6-rancher4",
+			Kubernetes:                "hackman91/hyperkube:v1.25.6-rancher4",
 			Alpine:                    "rancher/rke-tools:v0.1.87",
 			NginxProxy:                "rancher/rke-tools:v0.1.87",
 			CertDownloader:            "rancher/rke-tools:v0.1.87",
