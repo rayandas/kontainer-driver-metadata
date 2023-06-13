@@ -14,6 +14,8 @@ appDefaults:
         defaultVersion: '1.25.x'
       - appVersion: '>= 2.7.5-0 < 2.7.100-0'
         defaultVersion: '1.26.x'
+      - appVersion: '>= 2.7.5-0 < 2.7.100-0'
+        defaultVersion: '1.27.x'  
 releases:
   - version: v1.18.20+k3s1
     minChannelServerVersion: v2.6.0-alpha1
@@ -447,5 +449,11 @@ releases:
       <<: *serverArgs-v4
       helm-job-image:
         type: string
+    agentArgs: *agentArgs-v3
+    featureVersions: *featureVersions-v1
+  - version: v1.27.2+k3s1
+    minChannelServerVersion: v2.7.7-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
     agentArgs: *agentArgs-v3
     featureVersions: *featureVersions-v1
