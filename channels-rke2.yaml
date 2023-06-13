@@ -14,6 +14,8 @@ appDefaults:
         defaultVersion: '1.25.x'
       - appVersion: '>= 2.7.5-0 < 2.7.100-0'
         defaultVersion: '1.26.x'
+      - appVersion: '>= 2.7.5-0 < 2.7.100-0'
+        defaultVersion: '1.27.x'
 releases:
   - version: v1.19.16+rke2r1
     minChannelServerVersion: v2.6.0-alpha1
@@ -1183,4 +1185,12 @@ releases:
     agentArgs: *agentArgs-v1-25-7-rke2r1
     charts: &charts-v1-26-4-rke2r1
       <<: *charts-v1-25-9-rke2r1
-    featureVersions: *featureVersions-v1    
+    featureVersions: *featureVersions-v1   
+  - version: v1.27.2+rke2r1
+    minChannelServerVersion: v2.7.5-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v1-24-2-rke2r1
+    agentArgs: *agentArgs-v1-25-7-rke2r1
+    charts: &charts-v1-27-2-rke2r1
+      <<: *charts-v1-26-4-rke2r1
+    featureVersions: *featureVersions-v1 
