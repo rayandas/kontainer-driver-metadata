@@ -2,7 +2,7 @@ package templates
 
 /*
 CanalTemplateV3_26_1 is based on upstream canal v3.26.1
-https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/canal.yaml
+https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/canal.yaml
 Upstream Changelog:
 - Multiple updates on the CRDs
 

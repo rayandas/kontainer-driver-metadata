@@ -204,36 +204,36 @@ spec:
                   are sent to the stdout. [Default: INFO]'
                 type: string
               nodeMeshMaxRestartTime:
-                description: Time to allow for software restart for node-to-mesh peerings.  When
-                  specified, this is configured as the graceful restart timeout.  When
-                  not specified, the BIRD default of 120s is used. This field can
-                  only be set on the default BGPConfiguration instance and requires
-                  that NodeMesh is enabled
-                type: string
+                  description: Time to allow for software restart for node-to-mesh peerings.  When
+                    specified, this is configured as the graceful restart timeout.  When
+                    not specified, the BIRD default of 120s is used. This field can
+                    only be set on the default BGPConfiguration instance and requires
+                    that NodeMesh is enabled
+                  type: string
               nodeMeshPassword:
-                description: Optional BGP password for full node-to-mesh peerings.
-                  This field can only be set on the default BGPConfiguration instance
-                  and requires that NodeMesh is enabled
-                properties:
-                  secretKeyRef:
-                    description: Selects a key of a secret in the node pod's namespace.
-                    properties:
-                      key:
-                        description: The key of the secret to select from.  Must be
-                          a valid secret key.
-                        type: string
-                      name:
-                        description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                  description: Optional BGP password for full node-to-mesh peerings.
+                    This field can only be set on the default BGPConfiguration instance
+                    and requires that NodeMesh is enabled
+                  properties:
+                    secretKeyRef:
+                      description: Selects a key of a secret in the node pod's namespace.
+                      properties:
+                        key:
+                          description: The key of the secret to select from.  Must be
+                            a valid secret key.
+                          type: string
+                        name:
+                          description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
                           TODO: Add other useful fields. apiVersion, kind, uid?'
-                        type: string
-                      optional:
-                        description: Specify whether the Secret or its key must be
-                          defined
-                        type: boolean
-                    required:
-                    - key
-                    type: object
-                type: object
+                          type: string
+                        optional:
+                          description: Specify whether the Secret or its key must be
+                            defined
+                          type: boolean
+                      required:
+                        - key
+                      type: object
+                  type: object
               nodeToNodeMeshEnabled:
                 description: 'NodeToNodeMeshEnabled sets whether full node to node
                   BGP mesh is enabled. [Default: true]'
@@ -4715,7 +4715,7 @@ spec:
         # This container installs the CNI binaries
         # and CNI network config file on each node.
         - name: install-cni
-          image: docker.io/calico/cni:v3.26.1
+          image: {{.CNIImage}}
           imagePullPolicy: IfNotPresent
           command: ["/opt/cni/bin/install"]
           envFrom:
@@ -4758,7 +4758,7 @@ spec:
         # i.e. bpf at /sys/fs/bpf and cgroup2 at /run/calico/cgroup. Calico-node initialisation is executed
         # in best effort fashion, i.e. no failure for errors, to not disrupt pod creation in iptable mode.
         - name: "mount-bpffs"
-          image: docker.io/calico/node:v3.26.1
+          image: {{.NodeImage}}
           imagePullPolicy: IfNotPresent
           command: ["calico-node", "-init", "-best-effort"]
           volumeMounts:
@@ -4784,7 +4784,7 @@ spec:
         # container programs network policy and routes on each
         # host.
         - name: calico-node
-          image: docker.io/calico/node:v3.26.1
+          image: {{.NodeImage}}
           imagePullPolicy: IfNotPresent
           envFrom:
           - configMapRef:
